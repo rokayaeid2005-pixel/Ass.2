@@ -1,0 +1,265 @@
+/* ==========================================================================
+   1. CSS Variables & Base Styles (Dark Mode Support)
+   ========================================================================== */
+:root {
+  --bg-color: #f8f9fa;
+  --surface-color: #ffffff;
+  --text-color: #212529;
+  --text-muted: #495057;
+  --border-color: #ced4da;
+  
+  --primary-color: #0d6efd;
+  --primary-hover: #0b5ed7;
+  --primary-text: #ffffff;
+
+  --secondary-color: #6c757d;
+  --secondary-hover: #5c636a;
+
+  --alert-success-bg: #d1e7dd;
+  --alert-success-text: #0f5132;
+  --alert-success-border: #badbcc;
+
+  --alert-warning-bg: #fff3cd;
+  --alert-warning-text: #664d03;
+  --alert-warning-border: #ffecb5;
+
+  --focus-ring: 3px solid #86b7fe;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Query */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-color: #f8f9fa;
+    --text-muted: #adb5bd;
+    --border-color: #495057;
+
+    --primary-color: #3d8bfd;
+    --primary-hover: #0d6efd;
+
+    --alert-success-bg: #0f5132;
+    --alert-success-text: #d1e7dd;
+    --alert-success-border: #146c43;
+
+    --alert-warning-bg: #664d03;
+    --alert-warning-text: #fff3cd;
+    --alert-warning-border: #997404;
+
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==========================================================================
+   2. Layout & Responsive Breakpoints
+   ========================================================================== */
+.site-header, .site-footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section {
+  background-color: var(--surface-color);
+  border: 1fr solid var(--border-color);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.section h2 {
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* Responsive Grid System:
+   - Mobile: 1 column
+   - Tablet (>= 768px): 2 columns
+   - Desktop (>= 1024px): 3 columns
+*/
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   3. Component Library
+   ========================================================================== */
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+}
+
+.btn-primary:hover, .btn-primary:focus-visible {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: #ffffff;
+}
+
+.btn-secondary:hover, .btn-secondary:focus-visible {
+  background-color: var(--secondary-hover);
+}
+
+.btn:focus-visible, input:focus-visible, select:focus-visible {
+  outline: var(--focus-ring);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-color);
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+/* Alerts / Notifications */
+.alert {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  background-color: var(--alert-success-bg);
+  color: var(--alert-success-text);
+  border-color: var(--alert-success-border);
+}
+
+.alert-warning {
+  background-color: var(--alert-warning-bg);
+  color: var(--alert-warning-text);
+  border-color: var(--alert-warning-border);
+}
+
+/* Modal Window (CSS-Only using :target) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+}
+
+.modal-overlay:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background-color: var(--surface-color);
+  padding: 24px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-close {
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.modal-footer {
+  text-align: right;
+}
